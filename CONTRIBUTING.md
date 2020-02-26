@@ -28,7 +28,32 @@ We accept fixes and features.  These resources will help you contribute.
 ### Identifying the scale
 (As per .Net Core contribution guidelines)
 
-> If you would like to contribute, first identify the scale of what you would like to contribute. If it is small (grammar/spelling or a bug fix) feel free to start working ?on a fix. If you are submitting a feature or substantial code contribution, please discuss it with the team via Gitter and ensure it follows the product roadmap. You might also read these two blogs posts on contributing code: [Open Source Contribution Etiquette](http://tirania.org/blog/archive/2010/Dec-31.html) by Miguel de Icaza and [Don't "Push" Your Pull Requests](https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/) by Ilya Grigorik. All code submissions will be rigorously reviewed and tested by the team, and only those that meet an extremely high bar for both quality and design/roadmap appropriateness will be merged into the source.
+Please read this excerpt from Manuel Icaza's blog:
+
+>Open Source Contribution Etiquette
+>by Miguel de Icaza
+>
+>Some developers, when faced with fixing, or adding a feature to an open source project are under the mistaken impression that the first step before any fixing takes place, or before adding a new feature takes place is to make the code "easier for them" to work on.
+>
+>"Easier for them" usually is a combination of renaming methods, fields, properties, locals; Refactoring of methods, classes; Gratuitous split of code in different files, or merging of code into a single file; Reorganization by alphabetical order, or functional order, or grouping functions closer to each other, or having helper methods first, or helper methods last. Changing indentation, aligning variables, or parameters or dozen other smaller changes.
+>
+>This is not how you contribute to an open source project.
+>
+>When you contribute fixes or new features to an open source project you should use the existing coding style, the existing coding patterns and stick by the active maintainer's choice for his code organization.
+>
+>The maintainer is in for the long-haul, and has been working on this code for longer than you have. Chances are, he will keep doing this even after you have long moved into your next project.
+>
+>Sending a maintainer a patch, or a pull request that consists of your "fix" mixed with a dozen renames, refactoring changes, variable renames, method renames, file splitting, layout changing code is not really a contribution, it is home work.
+>
+>The maintainer now has to look at your mess of a patch and extract the actual improvement, wasting precious time that could have gone to something else. This sometimes negates the effort of your "contribution".
+>
+>If you really have an urge to refactor the code, first of all, discuss the changes with the maintainer with the rationale for the changes. If the maintainer agrees with the changes, make sure that you keep your refactoring and changes independent from code fixes, it makes reviewing the code a lot simpler.
+>
+>The alternative, to keep your fork, is usually a guarantee that your effort will be wasted, and wont help other users. People have tried to do this. It is attempted every year, by hunders of developers who in tbe back of their minds are thinking "I can do better" and "I wont make the same mistakes". After 18 years doing open source I can probably think of a handful of project forks that have survived and flourished. Out of hundreds of such failures. So the odds are not good.
+>
+>So respect the original coding style, and if you want to make refactoring changes, discuss this with the maintainer.
+>
+> If you would like to contribute, first identify the scale of what you would like to contribute.  If you are submitting a feature or substantial code contribution, please discuss it with the team via Gitter and ensure it follows the product roadmap. You might also read these two blogs posts on contributing code: [Open Source Contribution Etiquette](http://tirania.org/blog/archive/2010/Dec-31.html) by Miguel de Icaza and [Don't "Push" Your Pull Requests](https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/) by Ilya Grigorik. All code submissions will be rigorously reviewed and tested by the team, and only those that meet an extremely high bar for both quality and design/roadmap appropriateness will be merged into the source.
 
 ### Submitting a pull request
 (As per .Net Core contribution guidelines)
