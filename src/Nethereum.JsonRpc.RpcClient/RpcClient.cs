@@ -14,7 +14,7 @@ namespace Nethereum.JsonRpc.Client
     public class RpcClient : ClientBase
     {
         private const int NUMBER_OF_SECONDS_TO_RECREATE_HTTP_CLIENT = 60;
-        private const int MAXIMUM_CONNECTIONS_PER_SERVER = 20;
+        public static int MaximumConnectionsPerServer { get; set; } = 20;
         private readonly AuthenticationHeaderValue _authHeaderValue;
         private readonly Uri _baseUrl;
         private readonly HttpClientHandler _httpClientHandler;
@@ -56,21 +56,29 @@ namespace Nethereum.JsonRpc.Client
 
         private static HttpMessageHandler GetDefaultHandler()
         {
+            try
+            {
 #if NETSTANDARD2_0
-            return new HttpClientHandler
-            {
-                MaxConnectionsPerServer = MAXIMUM_CONNECTIONS_PER_SERVER
-            };
+                return new HttpClientHandler
+                {
+                    MaxConnectionsPerServer = MaximumConnectionsPerServer
+                };
+           
 #elif NETCOREAPP2_1 || NETCOREAPP3_1
-            return new SocketsHttpHandler
-            {
-                PooledConnectionLifetime = new TimeSpan(0, NUMBER_OF_SECONDS_TO_RECREATE_HTTP_CLIENT, 0),
-                PooledConnectionIdleTimeout = new TimeSpan(0, NUMBER_OF_SECONDS_TO_RECREATE_HTTP_CLIENT, 0),
-                MaxConnectionsPerServer = MAXIMUM_CONNECTIONS_PER_SERVER
-            };
+                return new SocketsHttpHandler
+                {
+                    PooledConnectionLifetime = new TimeSpan(0, NUMBER_OF_SECONDS_TO_RECREATE_HTTP_CLIENT, 0),
+                    PooledConnectionIdleTimeout = new TimeSpan(0, NUMBER_OF_SECONDS_TO_RECREATE_HTTP_CLIENT, 0),
+                    MaxConnectionsPerServer = MaximumConnectionsPerServer
+                };
 #else
-            return new HttpClientHandler();
+                return null;
 #endif
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public RpcClient(Uri baseUrl, HttpClient httpClient, AuthenticationHeaderValue authHeaderValue = null,
@@ -194,7 +202,21 @@ namespace Nethereum.JsonRpc.Client
 
         private HttpClient CreateNewHttpClient()
         {
-            var httpClient = _httpClientHandler != null ? new HttpClient(_httpClientHandler) : new HttpClient(GetDefaultHandler());
+            HttpClient httpClient = new HttpClient();
+            
+            if (_httpClientHandler != null)
+            {
+                httpClient = new HttpClient(_httpClientHandler);
+            }
+            else
+            {
+                var handler = GetDefaultHandler();
+                if(handler != null)
+                {
+                    httpClient = new HttpClient(handler);
+                }
+            }
+
             InitialiseHttpClient(httpClient);
             return httpClient;
         }
